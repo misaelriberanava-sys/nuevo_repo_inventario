@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-$dsn = 'mysql:host=localhost;dbname=tienda;charset=utf8mb4';
+$dsn = 'mysql:host=localhost;dbname=inventario;charset=utf8mb4';
 $usuario = 'root';
 $password = '';
 
