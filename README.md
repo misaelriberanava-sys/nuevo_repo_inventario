@@ -5,7 +5,7 @@ Base del proyecto: configuración de la conexión PDO y estructura de carpetas.
 ## Estructura
 
 ```
-config/db.php             Conexión PDO a la base inventario
+config/db.php             Conexión PDO a la base tienda
 public/index.php          Punto de entrada único
 database/schema.sql       Tablas proveedores/productos y vista
 database/seed.sql         Datos de prueba

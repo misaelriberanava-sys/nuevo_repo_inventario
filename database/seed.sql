@@ -1,4 +1,4 @@
-USE inventario;
+USE tienda;
 
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE productos;

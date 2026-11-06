@@ -1,8 +1,8 @@
-CREATE DATABASE IF NOT EXISTS inventario
+CREATE DATABASE IF NOT EXISTS tienda
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
 
-USE inventario;
+USE tienda;
 
 CREATE TABLE IF NOT EXISTS proveedores (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS productos (
     nombre VARCHAR(80) NOT NULL,
     precio DECIMAL(10, 2) NOT NULL,
     stock INT NOT NULL DEFAULT 0,
-    INDEX idx_proveedor_id (proveedor_id),
+    INDEX idx_productos_proveedor (proveedor_id),
     CONSTRAINT fk_productos_proveedor
         FOREIGN KEY (proveedor_id) REFERENCES proveedores(id)
         ON UPDATE CASCADE
