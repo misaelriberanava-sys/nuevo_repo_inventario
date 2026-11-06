@@ -10,7 +10,8 @@ declare(strict_types=1);
     <style>
         body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #f5f6f8; color: #222; }
         header { background: #1f2937; padding: 0.75rem 1.5rem; }
-        header a { color: #fff; text-decoration: none; font-weight: 600; }
+        nav { display: flex; gap: 1rem; }
+        nav a { color: #fff; text-decoration: none; font-weight: 600; }
         main { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem; }
         h1, h2 { margin-top: 0; }
         table { width: 100%; border-collapse: collapse; background: #fff; margin-bottom: 1rem; }
@@ -27,14 +28,19 @@ declare(strict_types=1);
         .errores ul { margin: 0; padding-left: 1.2rem; }
         .campo { margin-bottom: 1rem; }
         label { display: block; font-weight: 600; margin-bottom: 0.25rem; }
-        input[type="text"], input[type="email"] { width: 100%; max-width: 420px; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 6px; }
+        input[type="text"], input[type="email"], input[type="number"], select { width: 100%; max-width: 420px; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 6px; }
+        .filtro-label { margin: 0; }
+        form[method="get"] select { max-width: 260px; }
         .error-campo { color: #991b1b; font-size: 0.85rem; margin-top: 0.25rem; }
         .vacio { color: #6b7280; }
     </style>
 </head>
 <body>
     <header>
-        <a href="/proveedores">Proveedores</a>
+        <nav>
+            <a href="/proveedores">Proveedores</a>
+            <a href="/productos">Productos</a>
+        </nav>
     </header>
     <main>
         <?php require $contenido; ?>
