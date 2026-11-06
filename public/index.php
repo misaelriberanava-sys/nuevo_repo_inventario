@@ -5,6 +5,7 @@ $pdo = require __DIR__ . '/../config/db.php';
 
 require_once __DIR__ . '/../config/helpers.php';
 require_once __DIR__ . '/../controllers/ProveedorController.php';
+require_once __DIR__ . '/../controllers/ProductoController.php';
 
 $ruta = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
 $ruta = rtrim($ruta, '/');
@@ -14,60 +15,113 @@ if ($ruta === '') {
 }
 
 $metodo = $_SERVER['REQUEST_METHOD'] ?? 'GET';
-$controlador = new ProveedorController($pdo);
+
+$controladorProveedor = new ProveedorController($pdo);
+$controladorProducto = new ProductoController($pdo);
 
 $proveedorId = null;
-$editarId = null;
-$eliminarId = null;
+$proveedorEditar = null;
+$proveedorEliminar = null;
 
 if (preg_match('#^/proveedores/(\d+)$#', $ruta, $coincidencias) === 1) {
     $proveedorId = (int) $coincidencias[1];
 }
 
 if (preg_match('#^/proveedores/(\d+)/editar$#', $ruta, $coincidencias) === 1) {
-    $editarId = (int) $coincidencias[1];
+    $proveedorEditar = (int) $coincidencias[1];
 }
 
 if (preg_match('#^/proveedores/(\d+)/eliminar$#', $ruta, $coincidencias) === 1) {
-    $eliminarId = (int) $coincidencias[1];
+    $proveedorEliminar = (int) $coincidencias[1];
+}
+
+$productoId = null;
+$productoEditar = null;
+$productoEliminar = null;
+
+if (preg_match('#^/productos/(\d+)$#', $ruta, $coincidencias) === 1) {
+    $productoId = (int) $coincidencias[1];
+}
+
+if (preg_match('#^/productos/(\d+)/editar$#', $ruta, $coincidencias) === 1) {
+    $productoEditar = (int) $coincidencias[1];
+}
+
+if (preg_match('#^/productos/(\d+)/eliminar$#', $ruta, $coincidencias) === 1) {
+    $productoEliminar = (int) $coincidencias[1];
 }
 
 if ($ruta === '/') {
-    redirect('/proveedores');
+    redirect('/productos');
 }
 
 if ($ruta === '/proveedores' && $metodo === 'GET') {
-    $controlador->index();
+    $controladorProveedor->index();
     return;
 }
 
 if ($ruta === '/proveedores' && $metodo === 'POST') {
-    $controlador->store();
+    $controladorProveedor->store();
     return;
 }
 
 if ($ruta === '/proveedores/crear' && $metodo === 'GET') {
-    $controlador->create();
+    $controladorProveedor->create();
     return;
 }
 
 if ($proveedorId !== null && $metodo === 'GET') {
-    $controlador->show($proveedorId);
+    $controladorProveedor->show($proveedorId);
     return;
 }
 
-if ($editarId !== null && $metodo === 'GET') {
-    $controlador->edit($editarId);
+if ($proveedorEditar !== null && $metodo === 'GET') {
+    $controladorProveedor->edit($proveedorEditar);
     return;
 }
 
 if ($proveedorId !== null && $metodo === 'POST') {
-    $controlador->update($proveedorId);
+    $controladorProveedor->update($proveedorId);
     return;
 }
 
-if ($eliminarId !== null && $metodo === 'POST') {
-    $controlador->destroy($eliminarId);
+if ($proveedorEliminar !== null && $metodo === 'POST') {
+    $controladorProveedor->destroy($proveedorEliminar);
+    return;
+}
+
+if ($ruta === '/productos' && $metodo === 'GET') {
+    $controladorProducto->index();
+    return;
+}
+
+if ($ruta === '/productos' && $metodo === 'POST') {
+    $controladorProducto->store();
+    return;
+}
+
+if ($ruta === '/productos/crear' && $metodo === 'GET') {
+    $controladorProducto->create();
+    return;
+}
+
+if ($productoId !== null && $metodo === 'GET') {
+    $controladorProducto->show($productoId);
+    return;
+}
+
+if ($productoEditar !== null && $metodo === 'GET') {
+    $controladorProducto->edit($productoEditar);
+    return;
+}
+
+if ($productoId !== null && $metodo === 'POST') {
+    $controladorProducto->update($productoId);
+    return;
+}
+
+if ($productoEliminar !== null && $metodo === 'POST') {
+    $controladorProducto->destroy($productoEliminar);
     return;
 }
 
